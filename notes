@@ -1,0 +1,76 @@
+1️⃣ Les events les plus utilisés
+Event (numéro)	Nom X11	Description
+2	KeyPress	Une touche est pressée
+3	KeyRelease	Une touche est relâchée
+4	ButtonPress	Clic souris
+5	ButtonRelease	Relâchement bouton souris
+6	MotionNotify	Mouvement de la souris
+17	DestroyNotify	Fermeture fenêtre (croix)
+33	ClientMessage	Pour certains messages X11
+
+
+
+Etapes:
+
+- Ouvir fenetre
+	-lire map x
+	- copier map uniquement si map valide x
+	-initialisation (a voir avec l'avancement)
+	- mlx_init / mlx_new_window x
+	- map valide (caracteres + nombre) x
+		- caracteres x
+		- nombre x
+		- fermee par des murs x
+		- rectangulaire x
+		- de toute taille -> lire longueur map avant copy faire un malloc en fonction
+	- map valide (chemin)
+		- floodfill / backtracking
+			- recursive qui prend une position, lui donne un nouveau caractere (f par exemple)
+				et fait tout le reste de la map sauf les 1
+				plus tard, checker s'il y a des C ou E en plus = C ou E enferme entre des murs
+	Message d'erreur pour chaque cas
+
+-Verif extension fichier
+	verifier si .ber
+- Fermer fenetre avec croix + esc x
+	- key_press keycode esc avec mlx_hook x
+
+- Affichage map dans fenetre
+	- associer image a emplacement de la tile dans la map x
+	- ajuster la fenetre a la map x
+
+- Deplacement joueur
+	- keypress pour chaque touche (wasd + croix)
+
+- Passage sur collectible = collectible - + acces sortie
+	- quand C collecte -> C  = 0
+	- si passe sur E avant collecte tous les C E = 'D' pour garder en memoire la position
+
+- Free / fermeture fenetre (voir conditions sujet)
+
+-Protections (pointeurs null / frees / gnl...)
+
+- Norminette
+
+- ReadMe
+
+
+Map fermee par des murs:
+
+Ligne 1 = que des 1,
+Ligne 2 line[1][0] = 1 && line[avant '\n] = 1
+...
+Ligne finale (ligne + 1 = null) = que des 1
+
+Map rectangulaire:
+
+x = ligne
+y = colonne
+x > y
+ou y > x
+
+fonction:
+
+parcourir toutes lignes + compter si j != -> erreur
+idem pour y
+ + verif rapport x / y
