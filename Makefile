@@ -7,10 +7,10 @@ MLXDIR = minilibx
 MLX = -L$(MLXDIR) -lmlx -lXext -lX11 -lm
 LIBFTDIR = libft
 
-SRCS = so_long.c \
+SRCS = main.c \
 	check_map.c \
-	check_map_utils.c \
-	check_map_utils2.c \
+	forme_map.c \
+	check_items.c \
 	put_map_to_window.c \
 
 OBJS = $(SRCS:.c=.o)

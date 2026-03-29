@@ -21,6 +21,10 @@
 #  define TILE_SIZE 32
 #  define MAX_LINE 1024
 #  define KEY_ESC 65307
+#  define KEY_R 65363
+#  define KEY_L 65361
+#  define KEY_D 65364
+#  define KEY_U 65362
 # endif
 
 typedef struct s_game

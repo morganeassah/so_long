@@ -15,7 +15,7 @@ Etapes:
 - Ouvir fenetre
 	-lire map x
 	- copier map uniquement si map valide x
-	-initialisation (a voir avec l'avancement)
+	-initialisation a 0 x
 	- mlx_init / mlx_new_window x
 	- map valide (caracteres + nombre) x
 		- caracteres x
@@ -23,15 +23,16 @@ Etapes:
 		- fermee par des murs x
 		- rectangulaire x
 		- de toute taille -> lire longueur map avant copy faire un malloc en fonction
+			-imposer une taille limite
 	- map valide (chemin)
 		- floodfill / backtracking
 			- recursive qui prend une position, lui donne un nouveau caractere (f par exemple)
 				et fait tout le reste de la map sauf les 1
-				plus tard, checker s'il y a des C ou E en plus = C ou E enferme entre des murs
+				- checker s'il y a des C ou E en plus = C ou E enferme entre des murs
 	Message d'erreur pour chaque cas
 
 -Verif extension fichier
-	verifier si .ber
+	verifier si .ber x
 - Fermer fenetre avec croix + esc x
 	- key_press keycode esc avec mlx_hook x
 

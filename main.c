@@ -87,5 +87,9 @@ int	main(int ac, char **av)
 	mlx_hook(game.win_ptr, 17, 1L << 17, close_window, &game);
 	mlx_hook(game.win_ptr, 2, 1L << 0, key_press, &game);
 	mlx_loop(game.mlx_ptr);
+	//mlx_destroy_display
+	//mlx_destroy_window
+	//free_all(&game);
+	//free(mlx.ptr);
 	return (0);
 }

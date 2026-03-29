@@ -90,3 +90,14 @@ int	check_map(t_game *game, char *file_name)
 		return (0);
 	return (1);
 }
+
+int	is_map_ok(char **map, int lines)
+{
+	if (!walls(map, lines))
+		return (0);
+	if (!characters(map, lines))
+		return (0);
+	if (!is_rectangular(map, lines))
+		return (0);
+	return (1);
+}

@@ -12,45 +12,6 @@
 
 #include "so_long.h"
 
-int	is_map_ok(char **map, int lines)
-{
-	if (!walls(map, lines))
-		return (0);
-	if (!characters(map, lines))
-		return (0);
-	if (!is_rectangular(map, lines))
-		return (0);
-	return (1);
-}
-
-int	first_line(char **map)
-{
-	int	j;
-
-	j = 0;
-	while (map[0][j] && map[0][j] != '\n')
-	{
-		if (map[0][j] != '1')
-			return (0);
-		j++;
-	}
-	return (1);
-}
-
-int	last_line(char **map, int lines)
-{
-	int	j;
-
-	j = 0;
-	while (map[lines - 1][j] && map[lines - 1][j] != '\n')
-	{
-		if (map[lines - 1][j] != '1')
-			return (0);
-		j++;
-	}
-	return (1);
-}
-
 int	walls(char **map, int lines)
 {
 	int	i;
@@ -74,6 +35,23 @@ int	walls(char **map, int lines)
 		i++;
 	}
 	return (1);
+}
+
+void	characters_u(char *line, t_count *count)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 'E')
+			count->count_e++;
+		else if (line[i] == 'P')
+			count->count_p++;
+		else if (line[i] == 'C')
+				count->count_c++;
+		i++;
+	}
 }
 
 int	characters(char **map, int lines)
