@@ -12,11 +12,11 @@
 
 #include "so_long.h"
 
-void	key_press(int keycode, t_game *game)
+int	key_press(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 		free_all(game);
-	return ;
+	return (0);
 	//if (keycode == KEY_R)
 	//if (keycode == KEY_L)
 	//if (keycode == KEY_U)

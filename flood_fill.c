@@ -12,12 +12,19 @@
 
 #include "so_long.h"
 
-int	flood_fill(char **map)
+void	ft_flood_fill(char **map, int x, int y)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-
+	if ( x < 0 || y < 0 || !map)
+		return ;
+	if (map[y] == NULL)
+		return ;
+	if ((size_t)x >= ft_strlen(map[y]))
+		return ;
+	if (map[y][x] == '1' || map[y][x] == 'f')
+		return ;
+	map[y][x] = 'f';
+	ft_flood_fill(map, y + 1, x);
+	ft_flood_fill(map, y - 1, x);
+	ft_flood_fill(map, y, x + 1);
+	ft_flood_fill(map, y, x - 1);
 }

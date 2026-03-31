@@ -9,7 +9,6 @@ Event (numéro)	Nom X11	Description
 33	ClientMessage	Pour certains messages X11
 
 
-
 Etapes:
 
 - Ouvir fenetre
@@ -22,21 +21,22 @@ Etapes:
 		- nombre x
 		- fermee par des murs x
 		- rectangulaire x
-		- de toute taille -> lire longueur map avant copy faire un malloc en fonction
-			-imposer une taille limite
+		- de toute taille -> lire longueur map avant copy faire un malloc en fonction x
+			-imposer une taille limite x
 	- map valide (chemin)
-		- floodfill / backtracking
+		- floodfill / backtracking <-
 			- recursive qui prend une position, lui donne un nouveau caractere (f par exemple)
-				et fait tout le reste de la map sauf les 1
+				et fait tout le reste de la map sauf les 1 /
+				- utiliser un char qui sera une copy de la position dans map pour ne pas modifier
 				- checker s'il y a des C ou E en plus = C ou E enferme entre des murs
-	Message d'erreur pour chaque cas
+	Message d'erreur pour chaque cas /
 
 -Verif extension fichier
 	verifier si .ber x
 - Fermer fenetre avec croix + esc x
 	- key_press keycode esc avec mlx_hook x
 
-- Affichage map dans fenetre
+- Affichage map dans fenetre x
 	- associer image a emplacement de la tile dans la map x
 	- ajuster la fenetre a la map x
 

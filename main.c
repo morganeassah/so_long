@@ -48,7 +48,8 @@ void	free_all(t_game *game)
 		mlx_destroy_display(game->mlx_ptr);
 		free(game->mlx_ptr);
 	}
-	exit(0);
+	free(game->mlx_ptr);
+	exit (0);
 }
 
 
@@ -70,14 +71,10 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	if (!check_map(&game, av[1]))
-	{
-		ft_printf("invalid map\n");
 		return (1);
-	}
 	init_struct(&game);
 //	printf("mlx_ptr: %p\n", game.mlx_ptr);
 //	printf("win_ptr: %p\n", game.win_ptr);
-	printf("img_player: %p\n", game.img_player);
 	if (!game.img_player)
 	{
 		ft_printf("failed loading image\n");
@@ -87,9 +84,6 @@ int	main(int ac, char **av)
 	mlx_hook(game.win_ptr, 17, 1L << 17, close_window, &game);
 	mlx_hook(game.win_ptr, 2, 1L << 0, key_press, &game);
 	mlx_loop(game.mlx_ptr);
-	//mlx_destroy_display
-	//mlx_destroy_window
-	//free_all(&game);
-	//free(mlx.ptr);
+	free_all(&game);
 	return (0);
 }

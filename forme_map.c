@@ -21,7 +21,7 @@ int	is_square(char **map, int height)
 	length = count_length(map, 0);
 	if (length == height)
 	{
-		ft_printf("map is square\n");
+		ft_printf("Map is square\n");
 		return (0);
 	}
 	return (1);
@@ -54,7 +54,7 @@ int	same_line_length(char **map, int lines)
 	{
 		if (!map[i] || count_length(map, i) != length)
 		{
-			ft_printf("map is not rectangular\n");
+			ft_printf("Map is not rectangular\n");
 			return (0);
 		}
 		i++;

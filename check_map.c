@@ -33,6 +33,11 @@ int	copy_map(t_game *game, int fd)
 	game->map[i] = NULL;
 	game->map_h = i * TILE_SIZE;
 	game->map_w = count_length(game->map, 0) * TILE_SIZE;
+	if (game->map_h > MAX_H || game->map_w > MAX_W)
+	{
+		ft_printf("Wrong map dimensions");
+		return (0);
+	}
 //	ft_printf("Total lines read: %d\n", i);
 	return (i);
 }
@@ -54,7 +59,7 @@ int	read_map(t_game *game, char *file_name)
 	}
 	i = copy_map(game, fd);
 	fflush(stdout);
-	if (i <= 0 || !is_map_ok(game->map, i))
+	if (i <= 0 || !is_map_ok(game, i))
 	{
 		j = 0;
 		while (j < i)
@@ -67,37 +72,39 @@ int	read_map(t_game *game, char *file_name)
 	return (1);
 }
 
-int	check_map(t_game *game, char *file_name)
+int	check_map_extension(char *file_name)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	while (file_name[i])
-	{
-		if (file_name[i] != '.')
-			i++;
-		else
-			if (file_name[i + 1] != 'b')
-				return (0);
-			else if (file_name[i + 2] != 'e')
-				return (0);
-			else if (file_name[i + 3] != "r")
-				return (0);
-			else if (file_name[i + 4])
-				return (0);
-	}
-	if (!read_map(game, file_name))
+	len = ft_strlen(file_name);
+	if (len < 4)
+		return (0);
+	return (file_name[len - 4] == '.'
+		&& file_name[len -3] == 'b'
+		&& file_name[len - 2] == 'e'
+		&& file_name[len - 1] == 'r');
+}
+
+int	is_map_ok(t_game *game, int lines)
+{
+	if (!walls(game->map, lines))
+		return (0);
+	if (!characters(game->map, lines))
+		return (0);
+	if (!is_rectangular(game->map, lines))
 		return (0);
 	return (1);
 }
 
-int	is_map_ok(char **map, int lines)
+int	check_map(t_game *game, char *file_name)
 {
-	if (!walls(map, lines))
+	if (!check_map_extension(file_name))
+	{
+		ft_printf("Wrong file extension.");
 		return (0);
-	if (!characters(map, lines))
+	}
+	if (!read_map(game, file_name))
 		return (0);
-	if (!is_rectangular(map, lines))
-		return (0);
+	ft_flood_fill(game->map, 0, 0);
 	return (1);
 }

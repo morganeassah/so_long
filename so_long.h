@@ -19,6 +19,8 @@
 
 # ifndef TILE_SIZE
 #  define TILE_SIZE 32
+#  define MAX_W 1280
+#  define MAX_H 720
 #  define MAX_LINE 1024
 #  define KEY_ESC 65307
 #  define KEY_R 65363
@@ -65,12 +67,14 @@ void	characters_u(char *line, t_count *count);
 int		walls(char **map, int lines);
 int		last_line(char **map, int lines);
 int		first_line(char **map);
-int		is_map_ok(char **map, int lines);
+int		is_map_ok(t_game *game, int lines);
 int		read_map(t_game *game, char *file_name);
+int		check_map_extension(char *file_name);
 int		check_map(t_game *game, char *file_name);
+void		ft_flood_fill(char **map, int x, int y);
 
 // fonctions avec mlx
 int		close_window(t_game *game);
-void	key_press(int keycode, t_game *game);
+int		key_press(int keycode, t_game *game);
 
 #endif

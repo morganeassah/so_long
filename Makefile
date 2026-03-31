@@ -6,14 +6,17 @@ CFLAGS = -Wall -Wextra -Werror -g3
 MLXDIR = minilibx
 MLX = -L$(MLXDIR) -lmlx -lXext -lX11 -lm
 LIBFTDIR = libft
+OBJDIR = obj
 
 SRCS = main.c \
+	hooks.c \
+	flood_fill.c \
 	check_map.c \
 	forme_map.c \
 	check_items.c \
 	put_map_to_window.c \
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
 INLCUDES = -I$(MLXDIR) -I$(LIBFTDIR)
 
@@ -24,11 +27,12 @@ $(NAME): $(OBJS)
 	make -C $(MLXDIR)
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) -L$(LIBFTDIR) -lft $(MLX) -o $(NAME)
 
-%.o: %.c
+$(OBJDIR)/%.o: %.c
+	mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 	make -C $(LIBFTDIR) clean
 	make -C $(MLXDIR) clean
 
