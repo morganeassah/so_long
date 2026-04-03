@@ -66,5 +66,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int i, char c));
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
 char	*get_next_line(int fd);
+char	*free_gnl(char *tmp);
 
 #endif

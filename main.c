@@ -14,8 +14,9 @@
 
 int	render(t_game *game)
 {
-	print_map(game);
-	return (0);
+	if (!print_map(game))
+		return (0);
+	return (1);
 }
 
 /*void	load_image(t_game *game)
@@ -23,7 +24,7 @@ int	render(t_game *game)
 
 }*/
 
-void	init_struct(t_game *game)
+int	init_struct(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
@@ -32,32 +33,24 @@ void	init_struct(t_game *game)
 		exit (1);
 	}
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map_w, game->map_h, "so_long");
+	if (!game->win_ptr)
+		return (0);
 	game->img_wall = mlx_xpm_file_to_image(game->mlx_ptr, "src/wall.xpm", &game->img_w, &game->img_h);
+	if (!game->img_wall)
+		return (0);
 	game->img_player = mlx_xpm_file_to_image(game->mlx_ptr, "src/player.xpm", &game->img_w, &game->img_h);
+	if (!game->img_player)
+		return (0);
 	game->img_exit = mlx_xpm_file_to_image(game->mlx_ptr, "src/exit.xpm", &game->img_w, &game->img_h);
+	if (!game->img_exit)
+		return (0);
 	game->img_collectible = mlx_xpm_file_to_image(game->mlx_ptr, "src/item.xpm", &game->img_w, &game->img_h);
+	if (!game->img_collectible)
+		return (0);
 	game->img_floor = mlx_xpm_file_to_image(game->mlx_ptr, "src/floor.xpm", &game->img_w, &game->img_h);
-}
-
-void	free_all(t_game *game)
-{
-	if (game->win_ptr)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	if (game->mlx_ptr)
-	{
-		mlx_destroy_display(game->mlx_ptr);
-		free(game->mlx_ptr);
-	}
-	free(game->mlx_ptr);
-	exit (0);
-}
-
-
-
-int	close_window(t_game *game)
-{
-	free_all(game);
-	return (0);
+	if (!game->img_floor)
+		return (0);
+	return (1);
 }
 
 int	main(int ac, char **av)
@@ -71,10 +64,14 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	if (!check_map(&game, av[1]))
+	{
 		return (1);
-	init_struct(&game);
-//	printf("mlx_ptr: %p\n", game.mlx_ptr);
-//	printf("win_ptr: %p\n", game.win_ptr);
+	}
+	if (!init_struct(&game))
+	{
+		free_all(&game);
+		return (0);
+	}
 	if (!game.img_player)
 	{
 		ft_printf("failed loading image\n");

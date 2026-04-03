@@ -36,6 +36,7 @@ char	*new_str(char *buf)
 	}
 	tmp = ft_substr(buf, (i + 1), len);
 	free(buf);
+	tmp = free_gnl(tmp);
 	return (tmp);
 }
 

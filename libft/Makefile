@@ -50,7 +50,8 @@ SRCS = ft_isalpha.c \
 	   ft_substr.c \
 	   ft_printf.c \
 	   ft_printf_utils.c \
-	   get_next_line.c
+	   get_next_line.c \
+	   get_next_line_utils.c
 
 OBJ = $(SRCS:.c=.o)
 

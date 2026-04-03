@@ -1,51 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_utils2.c                                 :+:      :+:    :+:   */
+/*   forme_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: massah <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/20 15:02:14 by massah            #+#    #+#             */
-/*   Updated: 2026/03/20 15:02:17 by massah           ###   ########.fr       */
+/*   Created: 2026/04/03 16:35:37 by massah            #+#    #+#             */
+/*   Updated: 2026/04/03 16:35:51 by massah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_square(char **map, int height)
+int	same_line_length(char **map, int lines)
 {
 	int	length;
+	int	i;
 
-	if (!map[0])
-		return (0);
 	length = count_length(map, 0);
-	if (length == height)
-	{
-		ft_printf("Map is square\n");
+	if (!map || lines <= 0)
 		return (0);
+	i = 1;
+	while (i < lines)
+	{
+		if (!map[i] || count_length(map, i) != length)
+		{
+			ft_printf("Map is not rectangular\n");
+			return (0);
+		}
+		i++;
 	}
 	return (1);
 }
 
-int	count_length(char **map, int i)
+int	first_line(char **map)
 {
 	int	j;
 
 	j = 0;
-	if (!map[i])
-		return (0);
-	while (map[i][j] && map[i][j] != '\n')
+	while (map[0][j] && map[0][j] != '\n')
 	{
+		if (map[0][j] != '1')
+			return (0);
 		j++;
 	}
-	return (j);
+	return (1);
 }
 
-int	is_rectangular(char **map, int lines)
+int	last_line(char **map, int lines)
 {
-	if (!is_square(map, lines))
-		return (0);
-	if (!same_line_length(map, lines))
-		return (0);
+	int	j;
+
+	j = 0;
+	while (map[lines - 1][j] && map[lines - 1][j] != '\n')
+	{
+		if (map[lines - 1][j] != '1')
+			return (0);
+		j++;
+	}
 	return (1);
 }

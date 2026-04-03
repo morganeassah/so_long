@@ -47,9 +47,9 @@ Etapes:
 	- quand C collecte -> C  = 0
 	- si passe sur E avant collecte tous les C E = 'D' pour garder en memoire la position
 
-- Free / fermeture fenetre (voir conditions sujet)
+- Free / fermeture fenetre (voir conditions sujet) x
 
--Protections (pointeurs null / frees / gnl...)
+-Protections (pointeurs null / frees / gnl...) x
 
 - Norminette
 

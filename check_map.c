@@ -21,7 +21,6 @@ int	copy_map(t_game *game, int fd)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-//		ft_printf("Line %d: %s\n", i, line);
 		if (i >= MAX_LINE)
 		{
 			free(line);
@@ -38,7 +37,6 @@ int	copy_map(t_game *game, int fd)
 		ft_printf("Wrong map dimensions");
 		return (0);
 	}
-//	ft_printf("Total lines read: %d\n", i);
 	return (i);
 }
 
@@ -58,7 +56,6 @@ int	read_map(t_game *game, char *file_name)
 		return (0);
 	}
 	i = copy_map(game, fd);
-	fflush(stdout);
 	if (i <= 0 || !is_map_ok(game, i))
 	{
 		j = 0;
@@ -104,7 +101,9 @@ int	check_map(t_game *game, char *file_name)
 		return (0);
 	}
 	if (!read_map(game, file_name))
+	{
 		return (0);
+	}
 	ft_flood_fill(game->map, 0, 0);
 	return (1);
 }

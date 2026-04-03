@@ -10,9 +10,11 @@ OBJDIR = obj
 
 SRCS = main.c \
 	hooks.c \
+	free.c \
 	flood_fill.c \
 	check_map.c \
 	forme_map.c \
+	forme_map_utils.c \
 	check_items.c \
 	put_map_to_window.c \
 

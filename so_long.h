@@ -53,8 +53,8 @@ typedef struct t_count
 }	t_count;
 
 //afficher map dans fenetre
-void	print_map(t_game *game);
-void	init_struct(t_game *game);
+int		print_map(t_game *game);
+void	free_map(char **map);
 void	free_all(t_game *game);
 
 //check map
@@ -74,6 +74,7 @@ int		check_map(t_game *game, char *file_name);
 void		ft_flood_fill(char **map, int x, int y);
 
 // fonctions avec mlx
+int		init_struct(t_game *game);
 int		close_window(t_game *game);
 int		key_press(int keycode, t_game *game);
 
