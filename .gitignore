@@ -1,0 +1,10 @@
+# Fichiers objets et binaires
+
+*.o
+*.a
+so_long
+
+# Dossiers et Librairies
+
+obj/
+minilibx/
