@@ -38,6 +38,8 @@ typedef struct s_game
 	void	*img_player;
 	void	*img_collectible;
 	void	*img_exit;
+	int	y_p;
+	int	x_p;
 	int	img_h;
 	int	img_w;
 	int	map_w;
@@ -58,12 +60,16 @@ void	free_map(char **map);
 void	free_all(t_game *game);
 
 //check map
+char	**map_clone(char **map, char **copy);
+
+void	characters_u(char *line, t_count *count);
+void		ft_flood_fill(char **map, int x, int y);
+
 int		is_rectangular(char **map, int lines);
 int		same_line_length(char **map, int lines);
 int		is_square(char **map, int height);
 int		count_length(char **map, int i);
 int		characters(char **map, int lines);
-void	characters_u(char *line, t_count *count);
 int		walls(char **map, int lines);
 int		last_line(char **map, int lines);
 int		first_line(char **map);
@@ -71,11 +77,15 @@ int		is_map_ok(t_game *game, int lines);
 int		read_map(t_game *game, char *file_name);
 int		check_map_extension(char *file_name);
 int		check_map(t_game *game, char *file_name);
-void		ft_flood_fill(char **map, int x, int y);
+int		check_flood_fill(char **copy);
 
 // fonctions avec mlx
 int		init_struct(t_game *game);
 int		close_window(t_game *game);
 int		key_press(int keycode, t_game *game);
+
+// joueur
+
+void	find_player_pos(t_game *game);
 
 #endif

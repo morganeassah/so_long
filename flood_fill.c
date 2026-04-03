@@ -12,19 +12,85 @@
 
 #include "so_long.h"
 
-void	ft_flood_fill(char **map, int x, int y)
+
+char	**map_clone(char **map, char **copy)
 {
-	if ( x < 0 || y < 0 || !map)
+	int	len;
+	int	i;
+
+	len = 0;
+	while (map[len])
+		len++;
+	copy = malloc(sizeof (char *) * (len + 1));
+	if (!copy)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		copy[i] = ft_strdup(map[i]);
+		if (!copy[i])
+			return (NULL);
+		i++;
+	}
+	copy[i] = NULL;
+	return (copy);
+}
+
+void	find_player_pos(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == 'P')
+			{
+				game->y_p = i;
+				game->x_p = j;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	check_flood_fill(char **copy)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (copy[i])
+	{
+		j = 0;
+		while (copy[i][j])
+		{
+			if (copy[i][j] == 'E' || copy[i][j] == 'C')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+void	ft_flood_fill(char **copy, int x, int y)
+{
+	if ( x < 0 || y < 0 || !copy)
 		return ;
-	if (map[y] == NULL)
+	if (copy[y] == NULL)
 		return ;
-	if ((size_t)x >= ft_strlen(map[y]))
+	if ((size_t)x >= ft_strlen(copy[y]))
 		return ;
-	if (map[y][x] == '1' || map[y][x] == 'f')
+	if (copy[y][x] == '1' || copy[y][x] == 'f')
 		return ;
-	map[y][x] = 'f';
-	ft_flood_fill(map, y + 1, x);
-	ft_flood_fill(map, y - 1, x);
-	ft_flood_fill(map, y, x + 1);
-	ft_flood_fill(map, y, x - 1);
+	copy[y][x] = 'f';
+	ft_flood_fill(copy, x, y + 1);
+	ft_flood_fill(copy, x, y - 1);
+	ft_flood_fill(copy, x + 1, y);
+	ft_flood_fill(copy, x - 1, y);
 }

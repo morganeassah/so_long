@@ -11,34 +11,30 @@ Event (numéro)	Nom X11	Description
 
 Etapes:
 
-- Ouvir fenetre
+-initialisation a 0 x
+- Ouvir fenetre x
 	-lire map x
-	- copier map uniquement si map valide x
-	-initialisation a 0 x
-	- mlx_init / mlx_new_window x
-	- map valide (caracteres + nombre) x
+	- copier map uniquement si valide x
+		-verif extension fichier
 		- caracteres x
 		- nombre x
 		- fermee par des murs x
 		- rectangulaire x
-		- de toute taille -> lire longueur map avant copy faire un malloc en fonction x
-			-imposer une taille limite x
-	- map valide (chemin)
+		- de toute taille avec taille limite ecran x
 		- floodfill / backtracking <-
 			- recursive qui prend une position, lui donne un nouveau caractere (f par exemple)
-				et fait tout le reste de la map sauf les 1 /
+				et fait tout le reste de la map sauf les 1 x
 				- utiliser un char qui sera une copy de la position dans map pour ne pas modifier
 				- checker s'il y a des C ou E en plus = C ou E enferme entre des murs
-	Message d'erreur pour chaque cas /
-
--Verif extension fichier
-	verifier si .ber x
-- Fermer fenetre avec croix + esc x
-	- key_press keycode esc avec mlx_hook x
+	-Message d'erreur pour chaque cas x
 
 - Affichage map dans fenetre x
 	- associer image a emplacement de la tile dans la map x
 	- ajuster la fenetre a la map x
+
+- Fermer fenetre avec croix + esc x
+		- key_press keycode esc avec mlx_hook x
+		- mlx_init / mlx_new_window x
 
 - Deplacement joueur
 	- keypress pour chaque touche (wasd + croix)
@@ -51,9 +47,9 @@ Etapes:
 
 -Protections (pointeurs null / frees / gnl...) x
 
-- Norminette
+- Norminette /
 
-- ReadMe
+- ReadMe x
 
 
 Map fermee par des murs:

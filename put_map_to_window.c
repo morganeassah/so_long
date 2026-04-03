@@ -62,9 +62,3 @@ int	print_map(t_game *game)
 		return (0);
 	return (1);
 }
-
-/*void	print_map(t_game *game)
-{
-	ft_printf("print_map called\n");
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img_player, 0, 0);
-}*/

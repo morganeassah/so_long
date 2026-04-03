@@ -53,6 +53,7 @@ int	read_map(t_game *game, char *file_name)
 	if (fd < 0)
 	{
 		free(game->map);
+		game->map = NULL;
 		return (0);
 	}
 	i = copy_map(game, fd);
@@ -62,6 +63,7 @@ int	read_map(t_game *game, char *file_name)
 		while (j < i)
 			free(game->map[j++]);
 		free(game->map);
+		game->map = NULL;
 		close(fd);
 		return (0);
 	}
@@ -95,6 +97,7 @@ int	is_map_ok(t_game *game, int lines)
 
 int	check_map(t_game *game, char *file_name)
 {
+	char	**copy;
 	if (!check_map_extension(file_name))
 	{
 		ft_printf("Wrong file extension.");
@@ -104,6 +107,18 @@ int	check_map(t_game *game, char *file_name)
 	{
 		return (0);
 	}
-	ft_flood_fill(game->map, 0, 0);
+	copy = NULL;
+	copy = map_clone(game->map, copy);
+	if (!copy)
+		return (0);
+	find_player_pos(game);
+	ft_flood_fill(copy, game->y_p, game->x_p);
+	if (!check_flood_fill(copy))
+	{
+		ft_printf("Map is not playable\n");
+		free_map(copy);
+		return (0);
+	}
+	free_map(copy);
 	return (1);
 }

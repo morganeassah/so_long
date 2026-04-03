@@ -65,7 +65,8 @@ int	main(int ac, char **av)
 	}
 	if (!check_map(&game, av[1]))
 	{
-		return (1);
+		free_all(&game);
+		return (0);
 	}
 	if (!init_struct(&game))
 	{
