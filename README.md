@@ -1,16 +1,4 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    README.md                                          :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: massah <marvin@42.fr>                      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/04/03 16:57:54 by massah            #+#    #+#              #
-#    Updated: 2026/04/03 16:57:56 by massah           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-                *This project has been created as part of the 42 curriculum by <massah>.*
+               *This project has been created as part of the 42 curriculum by <massah>.*
 
 # Description:
 
