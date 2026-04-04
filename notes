@@ -15,17 +15,17 @@ Etapes:
 - Ouvir fenetre x
 	-lire map x
 	- copier map uniquement si valide x
-		-verif extension fichier
+		-verif extension fichier x
 		- caracteres x
 		- nombre x
 		- fermee par des murs x
 		- rectangulaire x
 		- de toute taille avec taille limite ecran x
-		- floodfill / backtracking <-
+		- floodfill / backtracking x
 			- recursive qui prend une position, lui donne un nouveau caractere (f par exemple)
 				et fait tout le reste de la map sauf les 1 x
-				- utiliser un char qui sera une copy de la position dans map pour ne pas modifier
-				- checker s'il y a des C ou E en plus = C ou E enferme entre des murs
+				- utiliser une copy de la map pour ne pas modifier x
+				- checker s'il y a des C ou E en plus = C ou E enferme entre des murs x
 	-Message d'erreur pour chaque cas x
 
 - Affichage map dans fenetre x
@@ -36,12 +36,12 @@ Etapes:
 		- key_press keycode esc avec mlx_hook x
 		- mlx_init / mlx_new_window x
 
-- Deplacement joueur
-	- keypress pour chaque touche (wasd + croix)
+- Deplacement joueur x
+	- keypress pour chaque touche (wasd + croix) x
 
-- Passage sur collectible = collectible - + acces sortie
-	- quand C collecte -> C  = 0
-	- si passe sur E avant collecte tous les C E = 'D' pour garder en memoire la position
+- Passage sur collectible = collectible - + acces sortie x
+	- quand C collecte -> C  = 0 x
+	- si passe sur E avant collecte tous les C E = 'D' + garder en memoire la position x
 
 - Free / fermeture fenetre (voir conditions sujet) x
 
@@ -71,3 +71,27 @@ fonction:
 parcourir toutes lignes + compter si j != -> erreur
 idem pour y
  + verif rapport x / y
+
+Mouvements du joueur
+
+	keypress
+	je verifie qu'on risque pas d'arriver sur un 1
+	si keypress = droite	-> y_pos + 1
+				= gauche	-> y_pos - 1
+				= haut		-> x_pos - 1
+				= bas		-> x_pos + 1
+
+- Sur un 0
+	map[last_pos] = 0
+	map[new_pos] = P
+- Sur un C
+	map[last_pos] = 0
+	map[new_pos] = P
+	apres le P devient un 0
+- Sur un E
+	map[last_pos] = 0
+	map[new_pos] = P ou D si tous les collectibles sont pas recuperes
+- Sur un D
+	map[last_pos] = 0
+	map[new_pos] = P
+	fermer programme ou message gagnant

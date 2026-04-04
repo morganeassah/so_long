@@ -19,12 +19,32 @@ int	render(t_game *game)
 	return (1);
 }
 
-/*void	load_image(t_game *game)
+int	load_image(t_game *game)
 {
+	game->img_wall = mlx_xpm_file_to_image(game->mlx_ptr, "src/wall.xpm",
+			&game->img_w, &game->img_h);
+	if (!game->img_wall)
+		return (0);
+	game->img_player = mlx_xpm_file_to_image(game->mlx_ptr, "src/player.xpm",
+			&game->img_w, &game->img_h);
+	if (!game->img_player)
+		return (0);
+	game->img_exit = mlx_xpm_file_to_image(game->mlx_ptr, "src/exit.xpm",
+			&game->img_w, &game->img_h);
+	if (!game->img_exit)
+		return (0);
+	game->img_collectible = mlx_xpm_file_to_image(game->mlx_ptr, "src/item.xpm",
+			&game->img_w, &game->img_h);
+	if (!game->img_collectible)
+		return (0);
+	game->img_floor = mlx_xpm_file_to_image(game->mlx_ptr, "src/floor.xpm",
+			&game->img_w, &game->img_h);
+	if (!game->img_floor)
+		return (0);
+	return (1);
+}
 
-}*/
-
-int	init_struct(t_game *game)
+int	init_mlx(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
@@ -32,23 +52,11 @@ int	init_struct(t_game *game)
 		ft_printf("mlx init failed\n");
 		exit (1);
 	}
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map_w, game->map_h, "so_long");
+	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map_w,
+			game->map_h, "so_long");
 	if (!game->win_ptr)
 		return (0);
-	game->img_wall = mlx_xpm_file_to_image(game->mlx_ptr, "src/wall.xpm", &game->img_w, &game->img_h);
-	if (!game->img_wall)
-		return (0);
-	game->img_player = mlx_xpm_file_to_image(game->mlx_ptr, "src/player.xpm", &game->img_w, &game->img_h);
-	if (!game->img_player)
-		return (0);
-	game->img_exit = mlx_xpm_file_to_image(game->mlx_ptr, "src/exit.xpm", &game->img_w, &game->img_h);
-	if (!game->img_exit)
-		return (0);
-	game->img_collectible = mlx_xpm_file_to_image(game->mlx_ptr, "src/item.xpm", &game->img_w, &game->img_h);
-	if (!game->img_collectible)
-		return (0);
-	game->img_floor = mlx_xpm_file_to_image(game->mlx_ptr, "src/floor.xpm", &game->img_w, &game->img_h);
-	if (!game->img_floor)
+	if (!load_image(game))
 		return (0);
 	return (1);
 }
@@ -57,26 +65,21 @@ int	main(int ac, char **av)
 {
 	t_game	game;
 
-	ft_memset(&game, 0, sizeof(t_game));
 	if (ac != 2)
 	{
-		ft_printf("missing map\n");
+		ft_printf("Missing map\n");
 		return (1);
 	}
+	ft_memset(&game, 0, sizeof(t_game));
 	if (!check_map(&game, av[1]))
 	{
 		free_all(&game);
 		return (0);
 	}
-	if (!init_struct(&game))
+	if (!init_mlx(&game))
 	{
 		free_all(&game);
 		return (0);
-	}
-	if (!game.img_player)
-	{
-		ft_printf("failed loading image\n");
-		free_all(&game);
 	}
 	mlx_loop_hook(game.mlx_ptr, render, &game);
 	mlx_hook(game.win_ptr, 17, 1L << 17, close_window, &game);

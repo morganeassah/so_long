@@ -38,38 +38,39 @@ typedef struct s_game
 	void	*img_player;
 	void	*img_collectible;
 	void	*img_exit;
-	int	y_p;
-	int	x_p;
-	int	img_h;
-	int	img_w;
-	int	map_w;
-	int	map_h;
+	int		y_p;
+	int		x_p;
+	int		m_p;
+	int		y_e;
+	int		x_e;
+	int		c;
+	int		img_h;
+	int		img_w;
+	int		map_w;
+	int		map_h;
+
+	int		count_e;
+	int		count_p;
+	int		count_c;
 	char	**map;
 }	t_game;
 
-typedef struct t_count
-{
-	int	count_e;
-	int	count_p;
-	int	count_c;
-}	t_count;
+// frees
 
-//afficher map dans fenetre
-int		print_map(t_game *game);
 void	free_map(char **map);
 void	free_all(t_game *game);
 
 //check map
-char	**map_clone(char **map, char **copy);
 
-void	characters_u(char *line, t_count *count);
-void		ft_flood_fill(char **map, int x, int y);
+char	**map_clone(char **map, char **copy);
+void	characters_u(char *line, t_game *game);
+void	ft_flood_fill(char **map, int x, int y);
 
 int		is_rectangular(char **map, int lines);
 int		same_line_length(char **map, int lines);
 int		is_square(char **map, int height);
 int		count_length(char **map, int i);
-int		characters(char **map, int lines);
+int		characters(t_game *game, int lines);
 int		walls(char **map, int lines);
 int		last_line(char **map, int lines);
 int		first_line(char **map);
@@ -79,13 +80,29 @@ int		check_map_extension(char *file_name);
 int		check_map(t_game *game, char *file_name);
 int		check_flood_fill(char **copy);
 
+//afficher map dans fenetre
+
+int		print_map(t_game *game);
+
 // fonctions avec mlx
-int		init_struct(t_game *game);
+
 int		close_window(t_game *game);
+int		init_mlx(t_game *game);
 int		key_press(int keycode, t_game *game);
+int		load_image(t_game *game);
 
 // joueur
 
 void	find_player_pos(t_game *game);
+void	new_map(t_game *game, int keycode);
+void	move_right(t_game *game);
+void	move_left(t_game *game);
+void	move_up(t_game *game);
+void	move_down(t_game *game);
+void	is_d(t_game *game, int j, int i);
+void	is_c(t_game *game, int j, int i);
+void	is_e(t_game *game, int j, int i);
+void	is_i(t_game *game, int j, int i);
+void	is_0(t_game *game, int j, int i);
 
 #endif

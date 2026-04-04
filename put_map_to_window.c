@@ -12,7 +12,26 @@
 
 #include "so_long.h"
 
-int	print_map_utils(t_game *game, int x, int y, int i)
+void	draw_tile(t_game *game, int x, int y, char c)
+{
+	if (c == '1')
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+			game->img_wall, x, y);
+	else if (c == '0')
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+			game->img_floor, x, y);
+	else if (c == 'C')
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+			game->img_collectible, x, y);
+	else if (c == 'E' || c == 'I')
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+			game->img_exit, x, y);
+	else if (c == 'P' || c == 'D')
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+			game->img_player, x, y);
+}
+
+int	print_map_utils(t_game *game, int i)
 {
 	int	j;
 
@@ -23,23 +42,7 @@ int	print_map_utils(t_game *game, int x, int y, int i)
 		j = 0;
 		while (game->map[i][j] && game->map[i][j] != '\n')
 		{
-			x = j * TILE_SIZE;
-			y = i * TILE_SIZE;
-			if (game->map[i][j] == '1')
-				mlx_put_image_to_window(game->mlx_ptr,
-					game->win_ptr, game->img_wall, x, y);
-			else if (game->map[i][j] == '0')
-				mlx_put_image_to_window(game->mlx_ptr,
-					game->win_ptr, game->img_floor, x, y);
-			else if (game->map[i][j] == 'C')
-				mlx_put_image_to_window(game->mlx_ptr,
-					game->win_ptr, game->img_collectible, x, y);
-			else if (game->map[i][j] == 'E')
-				mlx_put_image_to_window(game->mlx_ptr,
-					game->win_ptr, game->img_exit, x, y);
-			else if (game->map[i][j] == 'P')
-				mlx_put_image_to_window(game->mlx_ptr,
-					game->win_ptr, game->img_player, x, y);
+			draw_tile(game, j * TILE_SIZE, i * TILE_SIZE, game->map[i][j]);
 			j++;
 		}
 		i++;
@@ -50,15 +53,11 @@ int	print_map_utils(t_game *game, int x, int y, int i)
 int	print_map(t_game *game)
 {
 	int	i;
-	int	x;
-	int	y;
 
 	if (!game || !game->map)
 		return (0);
 	i = 0;
-	x = 0;
-	y = 0;
-	if (!print_map_utils(game, x, y, i))
+	if (!print_map_utils(game, i))
 		return (0);
 	return (1);
 }

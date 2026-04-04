@@ -44,25 +44,22 @@ int	read_map(t_game *game, char *file_name)
 {
 	int	fd;
 	int	i;
-	int	j;
 
-	game->map = malloc (sizeof(char *) * MAX_LINE);
+	game->map = ft_calloc(MAX_LINE, sizeof (char *));
 	if (!game->map)
 		return (0);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{
-		free(game->map);
+		ft_printf("Map doesn't exist\n");
+		free_map(game->map);
 		game->map = NULL;
 		return (0);
 	}
 	i = copy_map(game, fd);
 	if (i <= 0 || !is_map_ok(game, i))
 	{
-		j = 0;
-		while (j < i)
-			free(game->map[j++]);
-		free(game->map);
+		free_map(game->map);
 		game->map = NULL;
 		close(fd);
 		return (0);
@@ -88,7 +85,7 @@ int	is_map_ok(t_game *game, int lines)
 {
 	if (!walls(game->map, lines))
 		return (0);
-	if (!characters(game->map, lines))
+	if (!characters(game, lines))
 		return (0);
 	if (!is_rectangular(game->map, lines))
 		return (0);
@@ -98,9 +95,10 @@ int	is_map_ok(t_game *game, int lines)
 int	check_map(t_game *game, char *file_name)
 {
 	char	**copy;
+
 	if (!check_map_extension(file_name))
 	{
-		ft_printf("Wrong file extension.");
+		ft_printf("Wrong file extension \n");
 		return (0);
 	}
 	if (!read_map(game, file_name))

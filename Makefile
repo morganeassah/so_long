@@ -17,6 +17,8 @@ SRCS = main.c \
 	forme_map_utils.c \
 	check_items.c \
 	put_map_to_window.c \
+	mouvements.c \
+	mouvements_utils.c
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 

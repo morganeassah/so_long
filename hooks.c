@@ -15,10 +15,15 @@
 int	key_press(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
+	{
 		free_all(game);
-	return (0);
-	//if (keycode == KEY_R)
-	//if (keycode == KEY_L)
-	//if (keycode == KEY_U)
-	//if (keycode == KEY_D)
+		return (0);
+	}
+	if (keycode == KEY_R || keycode == KEY_L
+		|| keycode == KEY_U || keycode == KEY_D)
+	{
+		new_map(game, keycode);
+		return (0);
+	}
+	return (1);
 }

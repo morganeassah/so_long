@@ -12,7 +12,6 @@
 
 #include "so_long.h"
 
-
 char	**map_clone(char **map, char **copy)
 {
 	int	len;
@@ -21,7 +20,7 @@ char	**map_clone(char **map, char **copy)
 	len = 0;
 	while (map[len])
 		len++;
-	copy = malloc(sizeof (char *) * (len + 1));
+	copy = ft_calloc(len + 1, sizeof (char *));
 	if (!copy)
 		return (NULL);
 	i = 0;
@@ -52,6 +51,11 @@ void	find_player_pos(t_game *game)
 				game->y_p = i;
 				game->x_p = j;
 			}
+			if (game->map[i][j] == 'E')
+			{
+				game->y_e = i;
+				game->x_e = j;
+			}
 			j++;
 		}
 		i++;
@@ -80,7 +84,7 @@ int	check_flood_fill(char **copy)
 
 void	ft_flood_fill(char **copy, int x, int y)
 {
-	if ( x < 0 || y < 0 || !copy)
+	if (x < 0 || y < 0 || !copy)
 		return ;
 	if (copy[y] == NULL)
 		return ;

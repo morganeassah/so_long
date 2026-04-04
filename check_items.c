@@ -37,7 +37,7 @@ int	walls(char **map, int lines)
 	return (1);
 }
 
-void	characters_u(char *line, t_count *count)
+void	characters_u(char *line, t_game *game)
 {
 	int	i;
 
@@ -45,40 +45,36 @@ void	characters_u(char *line, t_count *count)
 	while (line[i])
 	{
 		if (line[i] == 'E')
-			count->count_e++;
+			game->count_e++;
 		else if (line[i] == 'P')
-			count->count_p++;
+			game->count_p++;
 		else if (line[i] == 'C')
-				count->count_c++;
+			game->count_c++;
 		i++;
 	}
 }
 
-int	characters(char **map, int lines)
+int	characters(t_game *game, int lines)
 {
 	int		i;
 	int		j;
-	t_count	count;
 
 	i = 0;
 	j = 0;
-	count.count_e = 0;
-	count.count_p = 0;
-	count.count_c = 0;
 	while (i < lines)
 	{
-		characters_u(map[i], &count);
-		while (map[i][j])
+		characters_u(game->map[i], game);
+		while (game->map[i][j])
 		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '\n'
-				&& map[i][j] != 'E' && map[i][j] != 'P' && map[i][j] != 'C')
+			if (game->map[i][j] != '0' && game->map[i][j] != '1'
+				&& game->map[i][j] != '\n' && game->map[i][j] != 'E'
+				&& game->map[i][j] != 'P' && game->map[i][j] != 'C')
 				return (0);
 			j++;
 		}
 		i++;
 	}
-	if (count.count_e != 1 || count.count_p != 1
-		|| count.count_c < 1)
+	if (game->count_e != 1 || game->count_p != 1 || game->count_c < 1)
 		return (0);
 	return (1);
 }

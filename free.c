@@ -36,17 +36,17 @@ void	free_map(char **map)
 void	free_all(t_game *game)
 {
 	free_map(game->map);
-	if (game->img_wall)
+	if (game->mlx_ptr && game->img_wall)
 		mlx_destroy_image(game->mlx_ptr, game->img_wall);
-	if (game->img_collectible)
+	if (game->mlx_ptr && game->img_collectible)
 		mlx_destroy_image(game->mlx_ptr, game->img_collectible);
-	if (game->img_player)
+	if (game->mlx_ptr && game->img_player)
 		mlx_destroy_image(game->mlx_ptr, game->img_player);
-	if (game->img_floor)
+	if (game->mlx_ptr && game->img_floor)
 		mlx_destroy_image(game->mlx_ptr, game->img_floor);
-	if (game->img_exit)
+	if (game->mlx_ptr && game->img_exit)
 		mlx_destroy_image(game->mlx_ptr, game->img_exit);
-	if (game->win_ptr)
+	if (game->mlx_ptr && game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	if (game->mlx_ptr)
 	{
