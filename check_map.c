@@ -84,9 +84,15 @@ int	check_map_extension(char *file_name)
 int	is_map_ok(t_game *game, int lines)
 {
 	if (!walls(game->map, lines))
+	{
+		ft_printf("Invalid Map\n");
 		return (0);
+	}
 	if (!characters(game, lines))
+	{
+		ft_printf("Invalid Map\n");
 		return (0);
+	}
 	if (!is_rectangular(game->map, lines))
 		return (0);
 	return (1);
